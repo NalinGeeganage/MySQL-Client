@@ -1,8 +1,12 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,6 +89,14 @@ public class LoginFormController {
             }
             else{
                 System.out.println("wede goda");
+                AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/view/ShellForm.fxml"));
+                Scene scene = new Scene(pane);
+                Stage primaryStage = (Stage) (btnConnect.getScene().getWindow());
+                primaryStage.setScene(scene);
+                primaryStage.sizeToScene();
+                primaryStage.setTitle("Shell Form");
+                primaryStage.setResizable(false);
+                primaryStage.show();
 
             }
         } catch (IOException | InterruptedException e) {
