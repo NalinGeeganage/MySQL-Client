@@ -21,15 +21,33 @@ public class LoginFormController {
 
 
 
-//        String command = String.format("mysql -h %s -u %s -p%s --port %s -e exit",
+
+        try {
+            if (txtHost.getText().trim().isEmpty()){
+                new Alert(Alert.AlertType.ERROR,"Please enter Host name",ButtonType.OK).show();
+                txtHost.requestFocus();
+                txtHost.selectAll();
+                return;
+            }
+            else if(txtPort.getText().trim().isEmpty()){
+                new Alert(Alert.AlertType.ERROR,"Check your port that you entered",ButtonType.OK).show();
+                txtPort.requestFocus();
+                txtPort.selectAll();
+                return;
+            }
+            else if (txtUserName.getText().trim().isEmpty()){
+                new Alert(Alert.AlertType.ERROR,"Invalid username",ButtonType.OK).show();
+                txtUserName.requestFocus();
+                txtUserName.selectAll();
+                return;
+            }
+
+            //        String command = String.format("mysql -h %s -u %s -p%s --port %s -e exit",
 //                txtHost.getText(),
 //                txtUserName.getText(),
 //                txtPassword.getText(),
 //                txtPort.getText());
 
-
-        try {
-            /*TODO : validation part*/
 //            String[]  command = {"mysql",
 //                    "-h",txtHost.getText(),
 //                    "-u",txtUserName.getText(),
@@ -67,6 +85,7 @@ public class LoginFormController {
             }
             else{
                 System.out.println("wede goda");
+
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
