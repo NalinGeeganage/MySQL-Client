@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,8 +23,6 @@ public class LoginFormController {
 
     public void btnConnect(ActionEvent event) {
         /*Check whether username and password are correct*/
-
-
 
 
         try {
@@ -89,15 +88,17 @@ public class LoginFormController {
             }
             else{
                 System.out.println("wede goda");
-                AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/view/ShellForm.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/ShellForm.fxml"));
+                AnchorPane pane = fxmlLoader.load();
+                ShellFormController controller = fxmlLoader.getController();
+                controller.initData(txtHost.getText(),txtPort.getText(),txtUserName.getText(),txtPassword.getText());
                 Scene scene = new Scene(pane);
                 Stage primaryStage = (Stage) (btnConnect.getScene().getWindow());
                 primaryStage.setScene(scene);
                 primaryStage.sizeToScene();
                 primaryStage.setTitle("Shell Form");
                 primaryStage.setResizable(false);
-                primaryStage.show();
-
+                Platform.runLater(primaryStage::sizeToScene);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
